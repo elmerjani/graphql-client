@@ -261,7 +261,8 @@ async function deleteUser(id) {
 
 // ========================= TESTING THE FUNCTIONS =========================
 
-getAllUsers(0, 10);
+//getAllUsers(0, 10);
+
 
 //createUser("test", "docsousker", "lab@gmail.com", "0206");
 
