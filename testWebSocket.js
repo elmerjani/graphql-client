@@ -7,20 +7,20 @@ const ws = new WebSocket("ws://localhost:8080/graphql-ws", {
 });
 
 ws.on("open", () => {
-  console.log("🔗 WebSocket connected!");
+  console.log(" WebSocket connected");
 
-  // Étape 1 : Envoyer `connection_init`
+  // envoyer connectio
   ws.send(JSON.stringify({ type: "connection_init" }));
 
-  // Étape 2 : Attendre `connection_ack` avant de démarrer la souscription
+  // attendre l'acq
   ws.on("message", (data) => {
     const parsedData = JSON.parse(data);
-    console.log("📢 Raw WebSocket Message Received:", parsedData);
+    console.log("Raw WebSocket Message Received:", parsedData);
 
     if (parsedData.type === "connection_ack") {
-      console.log("✅ Connection acknowledged by server!");
+      console.log("Connection acknowledged by server!");
 
-      // Étape 3 : Démarrer la souscription avec les champs souhaités
+      // demarre souscription 
       const subscriptionQuery = {
         id: "unique-subscription-id",
         type: "start",
@@ -39,10 +39,10 @@ ws.on("open", () => {
       };
 
       ws.send(JSON.stringify(subscriptionQuery));
-      console.log("📡 Subscription request sent!");
+      console.log("Subscription request sent");
     } else if (parsedData.type === "data") {
       const userData = parsedData.payload.data.userCreated;
-      console.log("📢 New User Event Received:", {
+      console.log("New User Event Received:", {
         userId: userData.userId,
         userFirstName: userData.userFirstName,
         userLastName: userData.userLastName,
@@ -53,6 +53,6 @@ ws.on("open", () => {
 });
 
 ws.on("error", (error) => console.error("WebSocket error:", error));
-ws.on("close", () => console.log("❌ WebSocket disconnected!"));
+ws.on("close", () => console.log("WebSocket disconnected"));
 
 
